@@ -13,7 +13,7 @@ RESET="\033[0m"
 echo -e "${BOLD}${GREEN}"
 echo "================================================================="
 echo "   🍏 APPLE-LINUX-SUITE UNIVERSAL INSTALLER 🐧"
-echo "   Intel Mac Drivers & Apple Ecosystem Setup for any Linux Distro"
+echo "   Intel Mac Drivers, iPhones, Android & Smart Device Integration"
 echo "================================================================="
 echo -e "${RESET}"
 
@@ -44,6 +44,7 @@ install_packages() {
             apt-get update
             apt-get install -y \
                 libimobiledevice6 libimobiledevice-utils usbmuxd ifuse idevicerestore \
+                android-tools-adb android-tools-fastboot scrcpy simple-mtpfs \
                 pciutils lshw git build-essential dkms cpio curl xz-utils \
                 mbpfan hfsprogs hfsplus apfs-fuse uxplay \
                 avahi-daemon alsa-utils pipewire-audio-client-libraries || true
@@ -52,6 +53,7 @@ install_packages() {
             echo -e "${GREEN}Installing packages via Pacman...${RESET}"
             pacman -Sy --needed --noconfirm \
                 libimobiledevice usbmuxd ifuse idevicerestore \
+                android-tools scrcpy simple-mtpfs \
                 pciutils lshw git base-devel dkms cpio curl \
                 mbpfan hfsutils uxplay avahi pipewire-alsa || true
             ;;
@@ -59,6 +61,7 @@ install_packages() {
             echo -e "${GREEN}Installing packages via DNF...${RESET}"
             dnf install -y \
                 libimobiledevice libimobiledevice-utils usbmuxd ifuse idevicerestore \
+                android-tools scrcpy simple-mtpfs \
                 pciutils lshw git gcc make dkms cpio curl \
                 mbpfan uxplay avahi || true
             ;;
@@ -66,6 +69,7 @@ install_packages() {
             echo -e "${GREEN}Installing packages via Zypper...${RESET}"
             zypper install -y \
                 libimobiledevice6 libimobiledevice-tools usbmuxd ifuse \
+                android-tools scrcpy \
                 pciutils lshw git gcc make dkms cpio curl \
                 mbpfan hfsutils uxplay avahi || true
             ;;
@@ -121,8 +125,8 @@ fi
 echo -e "\n${BOLD}[Step 5/5] Deploying suite files & installing 'apple-linux' CLI executable...${RESET}"
 TARGET_DIR="/usr/local/share/apple-linux-suite"
 mkdir -p "$TARGET_DIR"
-cp -r "$SCRIPT_DIR/drivers" "$SCRIPT_DIR/ios" "$SCRIPT_DIR/ecosystem" "$SCRIPT_DIR/tools" "$SCRIPT_DIR/config" "$TARGET_DIR/" 2>/dev/null || true
-chmod +x "$TARGET_DIR"/drivers/*.sh "$TARGET_DIR"/ios/*.sh "$TARGET_DIR"/ecosystem/*.sh "$TARGET_DIR"/tools/*.sh 2>/dev/null || true
+cp -r "$SCRIPT_DIR/drivers" "$SCRIPT_DIR/ios" "$SCRIPT_DIR/mobile" "$SCRIPT_DIR/ecosystem" "$SCRIPT_DIR/tools" "$SCRIPT_DIR/config" "$TARGET_DIR/" 2>/dev/null || true
+chmod +x "$TARGET_DIR"/drivers/*.sh "$TARGET_DIR"/ios/*.sh "$TARGET_DIR"/mobile/*.sh "$TARGET_DIR"/ecosystem/*.sh "$TARGET_DIR"/tools/*.sh 2>/dev/null || true
 
 if [ -f "$SCRIPT_DIR/apple-linux.sh" ]; then
     cp "$SCRIPT_DIR/apple-linux.sh" /usr/local/bin/apple-linux
@@ -131,6 +135,6 @@ if [ -f "$SCRIPT_DIR/apple-linux.sh" ]; then
 fi
 
 echo -e "\n${BOLD}${GREEN}=================================================================${RESET}"
-echo -e "${BOLD}${GREEN}   ✅ Apple-Linux-Suite Installation Complete!${RESET}"
+echo -e "${BOLD}${GREEN}   ✅ Apple-Linux-Suite Universal Installation Complete!${RESET}"
 echo -e "${BOLD}${GREEN}=================================================================${RESET}"
-echo -e "You can now run '${YELLOW}apple-linux${RESET}' from any terminal to launch the Apple Management Wizard."
+echo -e "You can now run '${YELLOW}apple-linux${RESET}' from any terminal to launch the Management Wizard."
