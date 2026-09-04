@@ -1,0 +1,15 @@
+*.log
+*.o
+*.ko
+*.mod
+*.mod.c
+*.symvers
+*.order
+.tmp_versions/
+firmware/*.bin
+build/
+dist/
+__pycache__/
+*.swp
+*~
+.DS_Store
